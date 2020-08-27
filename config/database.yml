@@ -25,6 +25,7 @@ development:
   <<: *default
   database: eight_seven_two_consume_development
 
+
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
@@ -80,6 +81,8 @@ test:
 #
 production:
   <<: *default
-  database: eight_seven_two_consume_production
-  username: eight_seven_two_consume
-  password: <%= ENV['EIGHT_SEVEN_TWO_CONSUME_DATABASE_PASSWORD'] %>
+  database: <%= ENV['RDS_DATABASE'] %>
+  username: <%= ENV['RDS_USERNAME'] %>
+  password: <%= ENV['RDS_PASSWORD'] %>
+  host: <%= ENV['RDS_HOST'] %>
+  post: 5432
