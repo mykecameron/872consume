@@ -5,6 +5,7 @@ ruby '2.7.1'
 
 gem 'activeadmin'
 gem 'bootsnap', '>= 1.4.2', require: false
+gem 'devise'
 gem 'dotenv-rails'
 gem 'jbuilder', '~> 2.7'
 gem 'pg', '>= 0.18', '< 2.0'
