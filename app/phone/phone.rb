@@ -1,4 +1,6 @@
 module Phone
+  HOTLINE_NUMBER = '8722667863'
+
   def self.client
     @client ||= begin
       account_sid = ENV['TWILIO_SID']

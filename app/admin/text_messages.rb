@@ -4,7 +4,7 @@ ActiveAdmin.register TextMessage do
   form do |f|
     f.semantic_errors
     f.inputs do
-      f.input :from, as: :hidden, input_html: { value: '8722667863' }
+      f.input :from, as: :hidden, input_html: { value: Phone::HOTLINE_NUMBER }
       f.input :to, input_html: { maxlength: 10 }
 
       f.input :body, as: :text
