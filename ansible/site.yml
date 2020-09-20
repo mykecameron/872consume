@@ -25,6 +25,7 @@
           - libgdbm-dev
           - libgdbm5
           - libncurses5-dev
+          - libpq-dev
           - libreadline6-dev
           - libsqlite3-dev
           - libssl-dev
@@ -32,6 +33,7 @@
           - libxslt1-dev
           - libyaml-dev
           - nodejs
+          - postgresql-10
           - software-properties-common
           - sqlite3
           - yarn
@@ -71,3 +73,9 @@
       apt:
         name: nginx
         state: latest
+  roles:
+  - role: zaiste.passenger
+    nginx: extras
+    passenger_app_vars:
+    - name: RAILS_ENV
+      value: production
