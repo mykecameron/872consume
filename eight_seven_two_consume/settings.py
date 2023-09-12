@@ -74,9 +74,12 @@ WSGI_APPLICATION = 'eight_seven_two_consume.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "OPTIONS": {
+            "service": "db_service",
+            "passfile": ".pgpass",
+        },
     }
 }
 
