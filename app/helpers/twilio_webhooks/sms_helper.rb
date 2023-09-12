@@ -1,2 +1,0 @@
-module TwilioWebhooks::SmsHelper
-end
