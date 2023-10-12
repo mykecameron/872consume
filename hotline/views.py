@@ -1,7 +1,7 @@
 import os
 from django.shortcuts import render
 from twilio.rest import Client as TwilioClient
-from twilio.twiml.voice_response import VoiceResponse
+from twilio.twiml.voice_response import VoiceResponse, Gather
 from django.http import HttpResponse
 import openai
 
@@ -27,12 +27,27 @@ def incoming(request):
 
     resp = VoiceResponse()
 
+    # Listen to what the caller says
+    gather = Gather(action="/hotline/respond", method="GET") 
+    
     # Read a message aloud to the caller
-    resp.say(__response(), 'Polly.Joey')
+    gather.say(
+        __chatGptResponse(), 
+        'Polly.Joey',
+    )
 
-    return HttpResponse(resp)
+    resp.append(gather)
+    resp.say("You didn't say anything!")
+    
+    return HttpResponse(resp,  content_type='text/xml')
 
-def __response():
+def respond(request):
+    resp = VoiceResponse()
+    resp.say('Goodbye!')
+    
+    return HttpResponse(resp,  content_type='text/xml')
+    
+def __chatGptResponse():
     prompt = "You are a deceptive and somewhat incompetent sales representative named Joey who works for Consumer LLC, a corporation specializing in providing 'Full Life Consolidation' services for their clients. You are answering a call from a potential client."
     user_input = "Hello?"
 
