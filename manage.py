@@ -9,6 +9,22 @@ def main():
     """Load environment."""
     load_dotenv(find_dotenv())
 
+    """Added by ngrok"""
+    # This block handles 'make rundjangosite' which uses this manage.py as the entry point.
+    # Set env variable to protect against the autoreloader.
+    if os.getenv("NGROK_LISTENER_RUNNING") is None:
+        os.environ["NGROK_LISTENER_RUNNING"] = "true"
+        import asyncio, multiprocessing, ngrok
+
+        async def setup():
+            listen = sys.argv[2] if len(sys.argv) > 2 else "localhost:8000"
+            listener = await ngrok.default()
+            print(f"Forwarding to {listen} from ingress url: {listener.url()}")
+            listener.forward(listen)
+
+        asyncio.run(setup())
+    """End added by ngrok"""
+
     """Run administrative tasks."""
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'eight_seven_two_consume.settings')
     try:
