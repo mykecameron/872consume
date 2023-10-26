@@ -29,7 +29,13 @@ def index(request):
 
     # Respond
     resp = VoiceResponse()
-    gather = Gather(input="speech", action="/hotline/gather", method="POST") 
+    gather = Gather(
+        input="speech",
+        speechModel="experimental_conversations",
+        speechTimeout=2,
+        action="/hotline/gather", 
+        method="POST"
+        ) 
 
     gather.say(chat_gpt_response, 'Polly.Joey')
     resp.append(gather)
@@ -75,7 +81,7 @@ def gather(request):
 def __chat_gpt_response(call):
     print("Asking chat gpt...")
 
-    prompt = "You are a deceptive and somewhat incompetent sales representative named Joey who works for Consumer LLC, a corporation specializing in providing 'Full Life Consolidation' services for their clients. You are receiving a phone call from a potential client. Answer the call. Keep all your responses brief (a few sentences at most)."
+    prompt = "You are a deceptive and somewhat incompetent sales representative (assistant) named Joey who works for Consumer LLC, a corporation specializing in providing 'Full Life Consolidation' services for their clients. You are receiving a phone call from a potential client. Answer the call. Keep all your responses brief (a few sentences at most)."
 
     conversation = [
         {"role": "system", "content": prompt},
