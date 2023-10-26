@@ -1,4 +1,5 @@
 import os
+import pprint
 from django.shortcuts import render
 from twilio.rest import Client as TwilioClient
 from twilio.twiml.voice_response import VoiceResponse, Gather
@@ -86,7 +87,7 @@ def __chat_gpt_response(call):
     for message in messages:
         conversation.append({"role": message.role, "content": message.content})
 
-    print(conversation)
+    pprint.pp(conversation)
 
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
