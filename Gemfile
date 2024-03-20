@@ -67,3 +67,5 @@ group :test do
 end
 
 gem "twilio-ruby", "~> 6.12"
+
+gem "rspec-rails", "~> 6.1"
