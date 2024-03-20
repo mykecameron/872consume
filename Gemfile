@@ -69,3 +69,5 @@ end
 gem "twilio-ruby", "~> 6.12"
 
 gem "rspec-rails", "~> 6.1"
+
+gem "dotenv", "~> 3.1"
